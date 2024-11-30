@@ -14,7 +14,7 @@ const Contact = () => {
     const formData = { name, email, message };
 
     try {
-      const response = await fetch("http://localhost:5000/send-email", {
+      const response = await fetch("https://react-portfolio-uma6.onrender.com/send-email", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
