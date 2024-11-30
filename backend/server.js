@@ -10,7 +10,7 @@ const morgan = require('morgan');
 dotenv.config(); // Load environment variables from .env file
 
 const app = express();
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 10000;
 
 // Middleware
 app.use(cors({
@@ -86,7 +86,6 @@ app.post('/send-email', (req, res) => {
 });
 
 
-// Start the server
-app.listen(port, () => {
+app.listen(port, '0.0.0.0', () => {
   console.log(`Server running on port ${port}`);
 });
