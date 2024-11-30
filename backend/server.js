@@ -13,7 +13,12 @@ const app = express();
 const port = process.env.PORT || 5000;
 
 // Middleware
-app.use(cors()); // Enable CORS
+app.use(cors({
+  origin: "https://react-portfolio-uma6.onrender.com",  // Specify your frontend URL
+  methods: "GET,POST",  // Allow necessary HTTP methods
+  allowedHeaders: "Content-Type",  // Allow content type headers
+}));
+   // Enable CORS
 app.use(bodyParser.json()); // Parse incoming JSON bodies
 app.use(bodyParser.urlencoded({ extended: true })); // Parse URL-encoded data
 app.use(morgan('combined')); // Log HTTP requests
