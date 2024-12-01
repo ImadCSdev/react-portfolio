@@ -14,11 +14,28 @@ const port = process.env.PORT || 5000;
 
 // Middleware
 // app.use(cors());
-app.use(cors({
-  origin: "https://react-portfolio-uma6.onrender.com",  // Specify your frontend URL
-  methods: "GET,POST",  // Allow necessary HTTP methods
-  allowedHeaders: "Content-Type",  // Allow content type headers
-}));
+// app.use(cors({
+//   origin: "https://react-portfolio-uma6.onrender.com",  // Specify your frontend URL
+//   methods: "GET,POST",  // Allow necessary HTTP methods
+//   allowedHeaders: "Content-Type",  // Allow content type headers
+// }));
+
+const allowedOrigins = [
+  'https://react-portfolio-1-dnte.onrender.com', // Add your frontend domain here
+  'https://react-portfolio-uma6.onrender.com'   // Your other allowed domain
+];
+
+const corsOptions = {
+  origin: function (origin, callback) {
+    if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  }
+};
+
+app.use(cors(corsOptions));
    // Enable CORS
 app.use(bodyParser.json()); // Parse incoming JSON bodies
 app.use(bodyParser.urlencoded({ extended: true })); // Parse URL-encoded data
