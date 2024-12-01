@@ -8,17 +8,17 @@ const validator = require('validator');
 const morgan = require('morgan');
 
 dotenv.config(); // Load environment variables from .env file
-const path = require("path");
+// const path = require("path");
 const app = express();
 const port = process.env.PORT || 5000;
 
 // Middleware
-app.use(cors());
-// app.use(cors({
-//   origin: "https://react-portfolio-uma6.onrender.com",  // Specify your frontend URL
-//   methods: "GET,POST",  // Allow necessary HTTP methods
-//   allowedHeaders: "Content-Type",  // Allow content type headers
-// }));
+// app.use(cors());
+app.use(cors({
+  origin: "https://react-portfolio-uma6.onrender.com",  // Specify your frontend URL
+  methods: "GET,POST",  // Allow necessary HTTP methods
+  allowedHeaders: "Content-Type",  // Allow content type headers
+}));
    // Enable CORS
 app.use(bodyParser.json()); // Parse incoming JSON bodies
 app.use(bodyParser.urlencoded({ extended: true })); // Parse URL-encoded data
@@ -90,13 +90,13 @@ app.post('/send-email', (req, res) => {
 
  
 
-  // Serve static files from the frontend build directory
-app.use(express.static(path.join(__dirname, '/frontend/build')));
+//   // Serve static files from the frontend build directory
+// app.use(express.static(path.join(__dirname, '/frontend/build')));
 
-// Send index.html for any other requests
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '/frontend/build', 'index.html'));
-});
+// // Send index.html for any other requests
+// app.get('*', (req, res) => {
+//   res.sendFile(path.join(__dirname, '/frontend/build', 'index.html'));
+// });
 
 
 app.listen(port, () => {
