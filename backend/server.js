@@ -8,7 +8,7 @@ const validator = require('validator');
 const morgan = require('morgan');
 
 dotenv.config(); // Load environment variables from .env file
-// const path = require("path");
+const path = require("path");
 const app = express();
 const port = process.env.PORT || 5000;
 
@@ -90,13 +90,13 @@ app.post('/send-email', (req, res) => {
 
  
 
-//   // Serve static files from the frontend build directory
-// app.use(express.static(path.join(__dirname, '../frontend/build')));
+  // Serve static files from the frontend build directory
+app.use(express.static(path.join(__dirname, '/frontend/build')));
 
-// // Send index.html for any other requests
-// app.get('*', (req, res) => {
-//   res.sendFile(path.join(__dirname, '../frontend/build', 'index.html'));
-// });
+// Send index.html for any other requests
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '/frontend/build', 'index.html'));
+});
 
 
 app.listen(port, () => {
