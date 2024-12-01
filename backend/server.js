@@ -90,14 +90,13 @@ app.post('/send-email', (req, res) => {
 
  
 
- // Serve static files from the frontend build directory
- app.use(express.static(path.join(__dirname, '../frontend/build')));
+  // Serve static files from the frontend build directory
+app.use(express.static(path.join(__dirname, '../frontend/build')));
 
 // Send index.html for any other requests
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'frontend/build', 'index.html'));
+  res.sendFile(path.join(__dirname, '../frontend/build', 'index.html'));
 });
-
 
 
 app.listen(port, () => {
