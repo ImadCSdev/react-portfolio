@@ -13,11 +13,12 @@ const app = express();
 const port = process.env.PORT || 5000;
 
 // Middleware
-app.use(cors({
-  origin: "https://react-portfolio-uma6.onrender.com",  // Specify your frontend URL
-  methods: "GET,POST",  // Allow necessary HTTP methods
-  allowedHeaders: "Content-Type",  // Allow content type headers
-}));
+app.use(cors());
+// app.use(cors({
+//   origin: "https://react-portfolio-uma6.onrender.com",  // Specify your frontend URL
+//   methods: "GET,POST",  // Allow necessary HTTP methods
+//   allowedHeaders: "Content-Type",  // Allow content type headers
+// }));
    // Enable CORS
 app.use(bodyParser.json()); // Parse incoming JSON bodies
 app.use(bodyParser.urlencoded({ extended: true })); // Parse URL-encoded data
@@ -84,6 +85,19 @@ app.post('/send-email', (req, res) => {
     res.status(200).json({ message: 'Email sent successfully.' });
   });
 });
+
+  
+
+const path = require("path");
+
+// Serve static files from React's build folder
+app.use(express.static(path.join(__dirname, "frontend/build")));
+
+// Handle React routing, return all requests to React's index.html
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "frontend/build", "index.html"));
+});
+
 
 
 app.listen(port, () => {
